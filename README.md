@@ -1,28 +1,14 @@
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Build Status](https://travis-ci.org/bsamseth/cpp-project.svg?branch=master)](https://travis-ci.org/bsamseth/cpp-project)
-[![Build status](https://ci.appveyor.com/api/projects/status/g9bh9kjl6ocvsvse/branch/master?svg=true)](https://ci.appveyor.com/project/bsamseth/cpp-project/branch/master)
-[![Coverage Status](https://coveralls.io/repos/github/bsamseth/cpp-project/badge.svg?branch=master)](https://coveralls.io/github/bsamseth/cpp-project?branch=master)
-[![codecov](https://codecov.io/gh/bsamseth/cpp-project/branch/master/graph/badge.svg)](https://codecov.io/gh/bsamseth/cpp-project)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/eb004322b0d146239a57eb242078e179)](https://www.codacy.com/app/bsamseth/cpp-project?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bsamseth/cpp-project&amp;utm_campaign=Badge_Grade)
-[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/bsamseth/cpp-project.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/bsamseth/cpp-project/context:cpp)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/bsamseth/cpp-project.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/bsamseth/cpp-project/alerts/)
-[![license](https://img.shields.io/badge/license-Unlicense-blue.svg)](https://github.com/bsamseth/cpp-project/blob/master/LICENSE)
-[![Lines of Code](https://tokei.rs/b1/github/bsamseth/cpp-project)](https://github.com/Aaronepower/tokei)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/bsamseth/cpp-project.svg)](http://isitmaintained.com/project/bsamseth/cpp-project "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/bsamseth/cpp-project.svg)](http://isitmaintained.com/project/bsamseth/cpp-project "Percentage of issues still open")
 
-# Boiler plate for C++ projects 
+<h1 align="center">Quantization - team project</h1>
 
-This is a boiler plate for C++ projects. What you get:
+<div align="center">
 
--   Sources, headers and mains separated in distinct folders
--   Use of modern [CMake](https://cmake.org/) for much easier compiling
--   Setup for tests using [doctest](https://github.com/onqtam/doctest)
--   Continuous testing with [Travis-CI](https://travis-ci.org/), [Appveyor](https://www.appveyor.com) and [GitHub Actions](https://github.com/features/actions), with support for C++17.
--   Code coverage reports, including automatic upload to [Coveralls.io](https://coveralls.io/) and/or [Codecov.io](https://codecov.io)
--   Code documentation with [Doxygen](http://www.stack.nl/~dimitri/doxygen/)
-
-![Demo of usage](https://i.imgur.com/foymVfy.gif)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/karlosos/vector_quantization/graphs/commit-activity)
+[![GitHub contributors](https://img.shields.io/github/contributors/karlosos/vector_quantization.svg)](https://GitHub.com/karlosos/vector_quantization/graphs/contributors/)
+[![Build status](https://ci.appveyor.com/api/projects/status/jtaxsu0cl80gu5a7?svg=true)](https://ci.appveyor.com/project/karlosos/vector-quantization)
+[![Coverage Status](https://coveralls.io/repos/github/karlosos/vector_quantization/badge.svg?branch=main)](https://coveralls.io/github/karlosos/vector_quantization?branch=main)
+[![Lines of Code](https://tokei.rs/b1/github/karlosos/vector_quantization)](https://github.com/Aaronepower/tokei)
+</div>
 
 ## Structure
 ``` text
@@ -54,8 +40,17 @@ You can find the example source code that builds the `main` executable in [app/m
 If the executable you made does not use the library in [src/](src), then only the first line is needed.
 
 
+## Development
 
-## Building
+Clone this repo with:
+
+```
+> git clone --recurse-submodules https://github.com/karlosos/vector_quantization
+```
+
+or fetch submodules manually.
+
+### Building on Linux
 
 Build by making a build directory (i.e. `build/`), run `cmake` in that dir, and then use `make` to build the desired target.
 
@@ -71,38 +66,62 @@ Example:
 > make doc       # Generate html documentation.
 ```
 
-## .gitignore
+### Building on Windows
 
-The [.gitignore](.gitignore) file is a copy of the [Github C++.gitignore file](https://github.com/github/gitignore/blob/master/C%2B%2B.gitignore),
-with the addition of ignoring the build directory (`build/`).
+#### WSL solution with VSCode
 
-## Services
+I suggest using WSL [https://docs.microsoft.com/en-us/windows/wsl/install-win10](https://docs.microsoft.com/en-us/windows/wsl/install-win10). 
 
-If the repository is activated with Travis-CI, then unit tests will be built and executed on each commit.
-The same is true if the repository is activated with Appveyor.
+1. Open project folder in `cmd.exe` or terminal of your choice.
+2. Launch wsl with `bash`.
+3. Update repositories `sudo apt-get update`.
+3. Install CMake with `sudo apt-get install cmake`.
+4. Install development tools with `sudo apt-get install build-essential`
 
-If the repository is activated with Coveralls/Codecov, then deployment to Travis will also calculate code coverage and
-upload this to Coveralls.io and/or Codecov.io
+Then within the same terminal (on wsl) build project:
 
-## Setup
-
-### Using the GitHub template
-Click the `Use this template` button to make a new repository from this template.
-
-**NB**: GitHub templates do not carry over submodules, which means you need to add those back _before_ you can build the project. Run the following after you have generated your new project:
 ``` bash
-> git clone https://github.com/<your-username>/<your-repo-name>
-> git submodule add https://github.com/onqtam/doctest.git external/doctest
-> git commit -a --amend --no-edit
-> git push --force
+> mkdir build && cd build
+> cmake ..
+> make
+> ./main
 ```
 
-### From command line
-When starting a new project, you probably don't want the history of this repository. To start fresh you can use
-the [setup script](setup.sh) as follows:
+It's working. Great success!
+
+Now open VSCode and install following extensions:
+
+* [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+* [C++ Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack)
+* CMake Tools
+
+Close VSCode and launch it from wsl terminal in root folder of our project
+
 ``` bash
-> git clone --recurse-submodules https://github.com/bsamseth/cpp-project  # Or use ssh-link if you like.
-> cd cpp-project
-> bash setup.sh
+cd .. # you should be in vector_quantization folder
+code .
 ```
-The result is a fresh Git repository with one commit adding all files from the boiler plate. 
+
+You will be asked by CMake Tools extension to configure project. Select compiler and you're good to go.
+
+Debug application with `F5` or run without debugging with `CTRL+F5`.
+
+#### Building on real Windows
+
+Feel free to experiment and please share steps how to deal with it.
+
+### Building on MacOS
+
+1. Install CMake
+2. Build project
+
+```
+> mkdir build && cd build
+> cmake ..
+> make
+> ./main
+```
+
+3. Install C++ and CMake Tools extension in VSCode and close it.
+4. Open VSCode from root folder `vector_quantization`. CMake Tools should ask you to chose compiler.
+5. Debug application with `F5` or run with `CTRL+F5`.
