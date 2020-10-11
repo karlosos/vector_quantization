@@ -22,7 +22,7 @@ jobs:
 
         include:
           - toolchain: linux-gcc
-            os: ubuntu-latest
+            os: ubuntu-20.04
             compiler: gcc
 
           - toolchain: macos-clang

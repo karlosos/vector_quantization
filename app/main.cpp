@@ -43,10 +43,10 @@ int main() {
     std::filesystem::path output_path = "../img/output/";
     input_path.replace_filename(file.filename());
     output_path.replace_filename(file.filename());
-    bmp.ReadBmp(input_path, header, rgbData, headerSize, imageSize);
+    bmp.ReadBmp(input_path.string(), header, rgbData, headerSize, imageSize);
 
     std::cout << "Writing a new BMP file " << output_path << std::endl;
-    bmp.WriteBmp(output_path, header, rgbData, headerSize, imageSize, false,
+    bmp.WriteBmp(output_path.string(), header, rgbData, headerSize, imageSize, false,
                  false);
     std::cout << "Freeing resources..." << std::endl;
     delete rgbData;
