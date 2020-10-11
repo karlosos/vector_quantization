@@ -87,7 +87,7 @@ Then within the same terminal (on wsl) build project:
 > ./main
 ```
 
-It's working. Great success!
+It's working. Great success! You can now work with code however you want. Below its described way of configuring VSCode.
 
 Now open VSCode and install following extensions:
 
@@ -105,6 +105,8 @@ code .
 You will be asked by CMake Tools extension to configure project. Select compiler and you're good to go.
 
 Debug application with `F5` or run without debugging with `CTRL+F5`.
+
+If you have error *could not find a.out* then go to `Run->Open Configuration` and check executable path to `"program": "${workspaceFolder}/build/main"`.
 
 #### Building on real Windows
 
