@@ -6,40 +6,34 @@
 #include "doctest.h"
 #endif
 
+#include <filesystem>
 #include <iostream>
 #include <stdlib.h>
-#include <filesystem>
 
-#include "exampleConfig.h"
-#include "example.h"
 #include "bmp.h"
+#include "example.h"
+#include "exampleConfig.h"
 
 /*
  * Simple main program that demontrates how access
  * CMake definitions (here the version number) from source code.
  */
 int main() {
-  std::cout << "Vector Quantization "
-            << PROJECT_VERSION_MAJOR
-            << "."
-            << PROJECT_VERSION_MINOR
-            << "."
-            << PROJECT_VERSION_PATCH
-            << "."
-            << PROJECT_VERSION_TWEAK
-            << std::endl;
+  std::cout << "Vector Quantization " << PROJECT_VERSION_MAJOR << "."
+            << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH << "."
+            << PROJECT_VERSION_TWEAK << std::endl;
 
   BMP bmp = BMP();
 
   // Find all images
   std::string path = "../img/input";
   std::vector<std::filesystem::path> files;
-  for (const auto & entry : std::filesystem::directory_iterator(path)) {
+  for (const auto &entry : std::filesystem::directory_iterator(path)) {
     std::cout << entry.path() << std::endl;
     files.push_back(entry.path());
   }
 
-  for (const auto & file : files) {
+  for (const auto &file : files) {
     unsigned char *rgbData;
     unsigned char *header;
     unsigned int imageSize;
@@ -52,7 +46,8 @@ int main() {
     bmp.ReadBMP(input_path, header, rgbData, headerSize, imageSize);
 
     cout << "Writing a new BMP file " << output_path << endl;
-    bmp.WriteBMP(output_path, header, rgbData, headerSize, imageSize, false, false);
+    bmp.WriteBMP(output_path, header, rgbData, headerSize, imageSize, false,
+                 false);
     cout << "Freeing resources..." << endl;
     delete rgbData;
     delete header;
