@@ -127,3 +127,11 @@ Feel free to experiment and please share steps how to deal with it.
 3. Install C++ and CMake Tools extension in VSCode and close it.
 4. Open VSCode from root folder `vector_quantization`. CMake Tools should ask you to chose compiler.
 5. Debug application with `F5` or run with `CTRL+F5`.
+
+## Naming and other style guidelines
+
+Refer to [google cppguide](https://google.github.io/styleguide/cppguide.html#Naming).
+
+## Pair programming
+
+Install [Live Share extension for VSCode.](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare).
