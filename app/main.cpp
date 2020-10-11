@@ -10,7 +10,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "bmp.h"
+#include "bmp_loader.h"
 #include "example.h"
 #include "exampleConfig.h"
 
@@ -23,7 +23,7 @@ int main() {
             << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH << "."
             << PROJECT_VERSION_TWEAK << std::endl;
 
-  BMP bmp = BMP();
+  BmpLoader bmp = BmpLoader();
 
   // Find all images
   std::string path = "../img/input";
@@ -38,21 +38,21 @@ int main() {
     unsigned char *header;
     unsigned int imageSize;
     unsigned int headerSize;
-    cout << "Reading the BMP file " << file << endl;
+    std::cout << "Reading the BMP file " << file << std::endl;
     std::filesystem::path input_path = "../img/input/";
     std::filesystem::path output_path = "../img/output/";
     input_path.replace_filename(file.filename());
     output_path.replace_filename(file.filename());
-    bmp.ReadBMP(input_path, header, rgbData, headerSize, imageSize);
+    bmp.ReadBmp(input_path, header, rgbData, headerSize, imageSize);
 
-    cout << "Writing a new BMP file " << output_path << endl;
-    bmp.WriteBMP(output_path, header, rgbData, headerSize, imageSize, false,
+    std::cout << "Writing a new BMP file " << output_path << std::endl;
+    bmp.WriteBmp(output_path, header, rgbData, headerSize, imageSize, false,
                  false);
-    cout << "Freeing resources..." << endl;
+    std::cout << "Freeing resources..." << std::endl;
     delete rgbData;
     delete header;
   }
 
-  cout << "This application has ended its execution." << endl;
+  std::cout << "This application has ended its execution." << std::endl;
   return 0;
 }
