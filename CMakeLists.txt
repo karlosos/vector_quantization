@@ -39,7 +39,7 @@ find_lto(CXX)
 # --------------------------------------------------------------------------------
 set(SOURCES          # All .cpp files in src/
     src/example.cpp
-    src/bmp.cpp
+    src/bmp_loader.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp

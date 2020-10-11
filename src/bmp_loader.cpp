@@ -1,8 +1,8 @@
-#include "bmp.h"
+#include "bmp_loader.h"
 
-BMP::BMP() {}
+BmpLoader::BmpLoader() {}
 
-bool BMP::ReadBMP(string imagepath, unsigned char *&header,
+bool BmpLoader::ReadBmp(std::string imagepath, unsigned char *&header,
                   unsigned char *&rgbData, unsigned int &headerSize,
                   unsigned int &imageSize) {
   // BMP Header
@@ -14,7 +14,7 @@ bool BMP::ReadBMP(string imagepath, unsigned char *&header,
   // Open the file
   FILE *file = fopen(imagepath.c_str(), "rb");
   if (!file) {
-    cerr << "Image could not be opened\n" << endl;
+    std::cerr << "Image could not be opened\n" << std::endl;
     return false;
   }
 
@@ -24,7 +24,7 @@ bool BMP::ReadBMP(string imagepath, unsigned char *&header,
 
   if (fread(header, 1, 54, file) != 54 || header[0] != 'B' ||
       header[1] != 'M') {
-    cerr << "This is not a valid BMP file\n" << endl;
+    std::cerr << "This is not a valid BMP file\n" << std::endl;
     return false;
   }
 
@@ -67,7 +67,7 @@ bool BMP::ReadBMP(string imagepath, unsigned char *&header,
   return true;
 }
 
-bool BMP::WriteBMP(string imagepath, unsigned char *&header,
+bool BmpLoader::WriteBmp(std::string imagepath, unsigned char *&header,
                    unsigned char *&rgbData, unsigned int &headerSize,
                    unsigned int &imageSize, bool flip = false,
                    bool gray = false) {
