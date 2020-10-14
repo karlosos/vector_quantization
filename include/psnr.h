@@ -2,10 +2,13 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
+#include <cmath>
+
+#include "image.h"
 
 class Psnr {
 public:
   Psnr();
 
-  float calculate();
+  double calculate(Image &original, Image &reference);
 };
