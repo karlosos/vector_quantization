@@ -14,6 +14,7 @@
 #include "example.h"
 #include "exampleConfig.h"
 #include "image.h"
+#include "psnr.h"
 
 /*
  * Simple main program that demontrates how access
@@ -59,6 +60,9 @@ int main() {
 
   Image image;
   bmp.ReadBmp("../img/input/balloon.bmp", image);
+  Psnr psnr; 
+
+  std::cout << "PSNR: " << psnr.calculate(image, image) << std::endl;
 
   std::cout << image.width << std::endl;
   std::cout << image.height << std::endl;

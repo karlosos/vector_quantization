@@ -41,6 +41,7 @@ set(SOURCES          # All .cpp files in src/
     src/example.cpp
     src/bmp_loader.cpp
     src/image.cpp
+    src/psnr.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
