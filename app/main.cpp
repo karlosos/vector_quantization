@@ -27,26 +27,49 @@ int main() {
   BmpLoader bmp = BmpLoader();
 
   // Find all images
-  std::string path = "../img/input";
-  std::vector<std::filesystem::path> files;
-  for (const auto &entry : std::filesystem::directory_iterator(path)) {
-    std::cout << entry.path() << std::endl;
-    files.push_back(entry.path());
-  }
+  // std::string path = "../img/input";
+  // std::vector<std::filesystem::path> files;
+  // for (const auto &entry : std::filesystem::directory_iterator(path)) {
+  //   std::cout << entry.path() << std::endl;
+  //   files.push_back(entry.path());
+  // }
 
-  for (const auto &file : files) {
-    Image image;
-    std::cout << "Reading the BMP file " << file << std::endl;
-    std::filesystem::path input_path = "../img/input/";
-    std::filesystem::path output_path = "../img/output/";
-    input_path.replace_filename(file.filename());
-    output_path.replace_filename(file.filename());
-    bmp.ReadBmp(input_path.string(), image);
+  // for (const auto &file : files) {
+  //   Image image;
+  //   std::cout << "Reading the BMP file " << file << std::endl;
+  //   std::filesystem::path input_path = "../img/input/";
+  //   std::filesystem::path output_path = "../img/output/";
+  //   input_path.replace_filename(file.filename());
+  //   output_path.replace_filename(file.filename());
+  //   bmp.ReadBmp(input_path.string(), image);
 
-    std::cout << "Writing a new BMP file " << output_path << std::endl;
-    bmp.WriteBmp(output_path, image, false, false);
-  }
+  //   std::cout << "Pixels: " << std::endl;
+  //   std::cout << image.getPixel(0, 0) << std::endl;
+  //   std::cout << image.getPixel(0, 1) << std::endl;
+  //   std::cout << image.getPixel(0, 2) << std::endl;
 
-  std::cout << "This application has ended its execution." << std::endl;
+  //   std::cout << "Writing a new BMP file " << output_path << std::endl;
+  //   std::string filename = "../img/output/out.bmp";
+  //   bmp.WriteBmp(filename, image, false, false);
+  // }
+
+  // std::cout << "This application has ended its execution." << std::endl;
+
+  // testing image
+
+  Image image;
+  bmp.ReadBmp("../img/input/balloon.bmp", image);
+
+  std::cout << image.width << std::endl;
+  std::cout << image.height << std::endl;
+  std::cout << image.imageSize << std::endl;
+
+  std::cout << "Pixels: " << std::endl;
+  std::cout << image.getPixel(0, 0) << std::endl;
+  std::cout << image.getPixel(1, 1) << std::endl;
+  std::cout << image.getPixel(1, 2) << std::endl;
+
+  std::string filename = "../img/output/balloon.bmp";
+  bmp.WriteBmp(filename, image, false, false);
   return 0;
 }
