@@ -13,4 +13,6 @@ public:
   unsigned int width;
   unsigned int height;
   unsigned short bitsPerPixel;
+
+  int getPixel(int row, int col);
 };

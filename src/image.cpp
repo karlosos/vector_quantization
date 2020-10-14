@@ -9,3 +9,8 @@ Image::~Image() {
     delete this->rgbData;
     delete this->header;
 }
+
+int Image::getPixel(int row, int col) {
+    int position = -(row - this->height+1) * this->width + col;
+    return int(this->rgbData[position]);
+}
