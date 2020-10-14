@@ -2,15 +2,12 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
+#include "image.h"
 
 class BmpLoader {
 public:
   BmpLoader();
 
-  bool ReadBmp(std::string imagepath, unsigned char *&header,
-               unsigned char *&rgbData, unsigned int &headerSize,
-               unsigned int &imageSize);
-  bool WriteBmp(std::string imagepath, unsigned char *&header,
-                unsigned char *&rgbData, unsigned int &headerSize,
-                unsigned int &imageSize, bool flip, bool gray);
+  bool ReadBmp(std::string imagepath, Image &image);
+  bool WriteBmp(std::string imagepath, Image &image, bool flip, bool gray);
 };

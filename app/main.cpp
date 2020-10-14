@@ -13,6 +13,7 @@
 #include "bmp_loader.h"
 #include "example.h"
 #include "exampleConfig.h"
+#include "image.h"
 
 /*
  * Simple main program that demontrates how access
@@ -34,23 +35,16 @@ int main() {
   }
 
   for (const auto &file : files) {
-    unsigned char *rgbData;
-    unsigned char *header;
-    unsigned int imageSize;
-    unsigned int headerSize;
+    Image image;
     std::cout << "Reading the BMP file " << file << std::endl;
     std::filesystem::path input_path = "../img/input/";
     std::filesystem::path output_path = "../img/output/";
     input_path.replace_filename(file.filename());
     output_path.replace_filename(file.filename());
-    bmp.ReadBmp(input_path.string(), header, rgbData, headerSize, imageSize);
+    bmp.ReadBmp(input_path.string(), image);
 
     std::cout << "Writing a new BMP file " << output_path << std::endl;
-    bmp.WriteBmp(output_path.string(), header, rgbData, headerSize, imageSize, false,
-                 false);
-    std::cout << "Freeing resources..." << std::endl;
-    delete rgbData;
-    delete header;
+    bmp.WriteBmp(output_path, image, false, false);
   }
 
   std::cout << "This application has ended its execution." << std::endl;
