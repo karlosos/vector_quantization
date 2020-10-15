@@ -82,3 +82,7 @@ set_target_properties(
 
 # Set up tests (see tests/CMakeLists.txt).
 add_subdirectory(tests)
+
+add_custom_command(TARGET main POST_BUILD 
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/img/ $<TARGET_FILE_DIR:main>/img/)

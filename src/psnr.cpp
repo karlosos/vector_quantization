@@ -5,10 +5,14 @@ Psnr::Psnr(){
 };
 
 double Psnr::calculate(Image &original, Image &reference) {
-  if (original.width != reference.width || original.height != reference.height) {
+  if (original.width != reference.width ||
+      original.height != reference.height) {
     std::cout << "Psnr::calculate: image sizes are not the same" << std::endl;
-    std::cout << "Original: " << original.width << " " << original.height << std::endl;
-    std::cout << "Reference: " << reference.width << " " << reference.height << std::endl;
+    std::cout << "Original: " << original.width << " " << original.height
+              << std::endl;
+    std::cout << "Reference: " << reference.width << " " << reference.height
+              << std::endl;
+    throw NotCompatibleSizeException();
     return 0.0;
   }
 
@@ -22,6 +26,6 @@ double Psnr::calculate(Image &original, Image &reference) {
   mse = mse / (original.width * original.height);
 
   double nominator = 255 * 255;
-  double result = 10.0 * std::log10(nominator/mse);
+  double result = 10.0 * std::log10(nominator / mse);
   return result;
 }

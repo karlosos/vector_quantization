@@ -62,7 +62,7 @@ int main() {
   bmp.ReadBmp("../img/input/balloon.bmp", image1);
 
   Image image2;
-  bmp.ReadBmp("../img/output/balloon_noise.bmp", image2);
+  bmp.ReadBmp("../img/input/balloon_noise.bmp", image2);
   Psnr psnr; 
 
   std::cout << "PSNR: " << psnr.calculate(image1, image2) << std::endl;
