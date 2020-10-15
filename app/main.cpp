@@ -58,22 +58,25 @@ int main() {
 
   // testing image
 
-  Image image;
-  bmp.ReadBmp("../img/input/balloon.bmp", image);
+  Image image1;
+  bmp.ReadBmp("../img/input/balloon.bmp", image1);
+
+  Image image2;
+  bmp.ReadBmp("../img/output/balloon_noise.bmp", image2);
   Psnr psnr; 
 
-  std::cout << "PSNR: " << psnr.calculate(image, image) << std::endl;
+  std::cout << "PSNR: " << psnr.calculate(image1, image2) << std::endl;
 
-  std::cout << image.width << std::endl;
-  std::cout << image.height << std::endl;
-  std::cout << image.imageSize << std::endl;
+  // std::cout << image.width << std::endl;
+  // std::cout << image.height << std::endl;
+  // std::cout << image.imageSize << std::endl;
 
-  std::cout << "Pixels: " << std::endl;
-  std::cout << image.getPixel(0, 0) << std::endl;
-  std::cout << image.getPixel(1, 1) << std::endl;
-  std::cout << image.getPixel(1, 2) << std::endl;
+  // std::cout << "Pixels: " << std::endl;
+  // std::cout << image.getPixel(0, 0) << std::endl;
+  // std::cout << image.getPixel(1, 1) << std::endl;
+  // std::cout << image.getPixel(1, 2) << std::endl;
 
   std::string filename = "../img/output/balloon.bmp";
-  bmp.WriteBmp(filename, image, false, false);
+  bmp.WriteBmp(filename, image1, false, false);
   return 0;
 }

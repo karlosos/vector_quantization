@@ -40,3 +40,4 @@ settings.json
 tasks.json
 
 img/output/
+py_src/.venv/
