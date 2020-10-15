@@ -86,3 +86,11 @@ add_subdirectory(tests)
 add_custom_command(TARGET main POST_BUILD 
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                        ${CMAKE_SOURCE_DIR}/img/ $<TARGET_FILE_DIR:main>/img/)
+
+add_custom_target(copy-files ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/img/
+    ${CMAKE_BINARY_DIR}/img/
+)
+
+add_dependencies(main copy-files)
