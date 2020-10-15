@@ -135,3 +135,8 @@ Refer to [google cppguide](https://google.github.io/styleguide/cppguide.html#Nam
 ## Pair programming
 
 Install [Live Share extension for VSCode.](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare).
+
+## References:
+
+* https://isocpp.org/wiki/faq/exceptions#what-to-throw - good documentation for C++
+* https://github.com/onqtam/doctest/blob/master/doc/markdown/assertions.md#exceptions - doctest features
