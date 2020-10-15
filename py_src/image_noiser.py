@@ -17,7 +17,7 @@ img_arr = np.array(img)
 img_arr_noise = img_arr & 254 
 
 img_noise = Image.fromarray(img_arr_noise)
-img_noise.save("../img/output/balloon_noise.bmp")
+img_noise.save("../img/input/balloon_noise.bmp")
 
 print(f"PSNR: {PSNR(img_arr, img_arr_noise)}")
 

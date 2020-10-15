@@ -1,8 +1,9 @@
 #pragma once
+#include <cmath>
 #include <cstdio>
 #include <iostream>
+#include <stdexcept>
 #include <string>
-#include <cmath>
 
 #include "image.h"
 
@@ -11,4 +12,9 @@ public:
   Psnr();
 
   double calculate(Image &original, Image &reference);
+};
+
+class NotCompatibleSizeException : public std::runtime_error {
+public:
+  NotCompatibleSizeException() : std::runtime_error("NotCompatibleSizeException") {}
 };
