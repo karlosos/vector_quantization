@@ -1,17 +1,20 @@
 #pragma once
 #include <vector>
+#include <tuple>
 
 #include "image.h"
 #include "vectorizer.h"
 
-class BookcodeCreatorStrategy {
-public:
-    virtual ~BookcodeCreatorStrategy() {};
-    virtual std::vector<std::vector<int>> make(Image &image, int num_of_positions, int window_size) = 0;
-};
+using codebook_type = std::vector<std::vector<int>>; 
+using vectors_type = std::vector<std::vector<int>>;
 
-class BookcodeCreatorStrategyRandom {
+class BookcodeCreatorStrategyRandom  {
 public:
-    std::vector<std::vector<int>> make(Image &image, int num_of_positions, int window_size);
+    BookcodeCreatorStrategyRandom() = default;
+    BookcodeCreatorStrategyRandom(int numOfPositions, int windowSize) : numOfPositions(numOfPositions), windowSize(windowSize) {};
+    std::tuple<codebook_type, vectors_type> make(Image &image);
     bool isInCodebook(std::vector<std::vector<int>> &codebook, std::vector<int> &vector);
+
+    int numOfPositions{200};
+    int windowSize{2};
 };

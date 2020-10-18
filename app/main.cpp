@@ -9,6 +9,8 @@
 #include <filesystem>
 #include <iostream>
 #include <stdlib.h>
+#include <tuple>
+#include <utility>
 
 #include "bmp_loader.h"
 #include "example.h"
@@ -17,6 +19,7 @@
 #include "psnr.h"
 #include "vectorizer.h"
 #include "bookcode_creator_strategy.h"
+#include "quantizer.h"
 
 void processing_all_images() {
   BmpLoader bmp = BmpLoader();
@@ -62,15 +65,7 @@ void processing_all_images() {
   std::cout << "This application has ended its execution." << std::endl;
 }
 
-/*
- * Simple main program that demontrates how access
- * CMake definitions (here the version number) from source code.
- */
-int main() {
-  std::cout << "Vector Quantization " << PROJECT_VERSION_MAJOR << "."
-            << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH << "."
-            << PROJECT_VERSION_TWEAK << std::endl;
-
+void vectorization() {
   BmpLoader bmp;
 
   Image image1;
@@ -81,24 +76,55 @@ int main() {
   std::cout << "Width " << image1.width << " height:" << image1.height << std::endl;
   std::cout << "vectors length " << vectors.size() << std::endl;
   std::cout << "sample vector: " << std::endl;
-  for (const auto& i: vectors.at(0))
+  for (const auto& i: vectors.at(1))
     std::cout << i << ' '; 
   std::cout << std::endl;
+}
+
+void bookcode() {
+  BmpLoader bmp;
+
+  Image image1;
+  bmp.ReadBmp("../img/input/balloon.bmp", image1);
 
   // bookcode creation
   BookcodeCreatorStrategyRandom bookcode_creator;
-  auto bookcode = bookcode_creator.make(image1, 200, 2);
+  auto [bookcode, vectors] = bookcode_creator.make(image1);
   std::cout << "Bookcode size: " << bookcode.size() << std::endl;
   std::cout << "Bookcode sample: " << std::endl;
   for (const auto&i : bookcode.at(0)) {
     std::cout << i << ' ';
   }
   std::cout << std::endl;
+}
 
-  Image image2;
-  bmp.ReadBmp("../img/input/balloon_noise.bmp", image2);
+void quantization() {
+  BmpLoader bmp;
+
+  Image image1;
+  bmp.ReadBmp("../img/input/balloon.bmp", image1);
+
+  BookcodeCreatorStrategyRandom bookcodeCreator = BookcodeCreatorStrategyRandom(50, 2);
+  Image image2 = Quantizer::quantize(image1, bookcodeCreator);
+
+  bmp.WriteBmp("../img/output/balloon_quantized.bmp", image2, false, false);
+
   Psnr psnr; 
-
   std::cout << "PSNR: " << psnr.calculate(image1, image2) << std::endl;
+}
+
+/*
+ * Simple main program that demontrates how access
+ * CMake definitions (here the version number) from source code.
+ */
+int main() {
+  std::cout << "Vector Quantization " << PROJECT_VERSION_MAJOR << "."
+            << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH << "."
+            << PROJECT_VERSION_TWEAK << std::endl;
+
+  vectorization();
+  // bookcode();
+  // quantization();
+
   return 0;
 }
