@@ -15,6 +15,51 @@
 #include "exampleConfig.h"
 #include "image.h"
 #include "psnr.h"
+#include "vectorizer.h"
+
+void processing_all_images() {
+  BmpLoader bmp = BmpLoader();
+
+  // Find all images
+  std::string path = "../img/input";
+  std::vector<std::filesystem::path> files;
+  for (const auto &entry : std::filesystem::directory_iterator(path)) {
+    std::cout << entry.path() << std::endl;
+    files.push_back(entry.path());
+  }
+
+  bool all_divided_by = true;
+  int divider = 16;
+
+  for (const auto &file : files) {
+    Image image;
+    std::cout << "Reading the BMP file " << file << std::endl;
+    std::filesystem::path input_path = "../img/input/";
+    std::filesystem::path output_path = "../img/output/";
+    input_path.replace_filename(file.filename());
+    output_path.replace_filename(file.filename());
+    bmp.ReadBmp(input_path.string(), image);
+
+    std::cout << "Size: ";
+    std::cout << image.width << " ";
+    std::cout << image.height << std::endl;
+    std::cout << "Is divided by 2: ";
+    bool divided_by = image.width%divider == 0 && image.width%divider == 0;
+    if (!divided_by) {
+      all_divided_by = false;
+    }
+    std::cout << divided_by << std::endl;
+
+
+    std::cout << "Writing a new BMP file " << output_path << std::endl;
+    std::string filename = "../img/output/out.bmp";
+    bmp.WriteBmp(filename, image, false, false);
+  }
+
+  std::cout << "All images are divided by " << divider << " " << all_divided_by << std::endl;
+
+  std::cout << "This application has ended its execution." << std::endl;
+}
 
 /*
  * Simple main program that demontrates how access
@@ -25,58 +70,22 @@ int main() {
             << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH << "."
             << PROJECT_VERSION_TWEAK << std::endl;
 
-  BmpLoader bmp = BmpLoader();
-
-  // Find all images
-  // std::string path = "../img/input";
-  // std::vector<std::filesystem::path> files;
-  // for (const auto &entry : std::filesystem::directory_iterator(path)) {
-  //   std::cout << entry.path() << std::endl;
-  //   files.push_back(entry.path());
-  // }
-
-  // for (const auto &file : files) {
-  //   Image image;
-  //   std::cout << "Reading the BMP file " << file << std::endl;
-  //   std::filesystem::path input_path = "../img/input/";
-  //   std::filesystem::path output_path = "../img/output/";
-  //   input_path.replace_filename(file.filename());
-  //   output_path.replace_filename(file.filename());
-  //   bmp.ReadBmp(input_path.string(), image);
-
-  //   std::cout << "Pixels: " << std::endl;
-  //   std::cout << image.getPixel(0, 0) << std::endl;
-  //   std::cout << image.getPixel(0, 1) << std::endl;
-  //   std::cout << image.getPixel(0, 2) << std::endl;
-
-  //   std::cout << "Writing a new BMP file " << output_path << std::endl;
-  //   std::string filename = "../img/output/out.bmp";
-  //   bmp.WriteBmp(filename, image, false, false);
-  // }
-
-  // std::cout << "This application has ended its execution." << std::endl;
-
-  // testing image
+  BmpLoader bmp;
 
   Image image1;
   bmp.ReadBmp("../img/input/balloon.bmp", image1);
+  auto vectors = Vectorizer::vectorize(image1, 2);
+  std::cout << "Width " << image1.width << " height:" << image1.height << std::endl;
+  std::cout << "vectors length " << vectors.size() << std::endl;
+  std::cout << "sample vector: " << std::endl;
+  for (const auto& i: vectors.at(0))
+    std::cout << i << ' '; 
+  std::cout << std::endl;
 
   Image image2;
   bmp.ReadBmp("../img/input/balloon_noise.bmp", image2);
   Psnr psnr; 
 
   std::cout << "PSNR: " << psnr.calculate(image1, image2) << std::endl;
-
-  // std::cout << image.width << std::endl;
-  // std::cout << image.height << std::endl;
-  // std::cout << image.imageSize << std::endl;
-
-  // std::cout << "Pixels: " << std::endl;
-  // std::cout << image.getPixel(0, 0) << std::endl;
-  // std::cout << image.getPixel(1, 1) << std::endl;
-  // std::cout << image.getPixel(1, 2) << std::endl;
-
-  std::string filename = "../img/output/balloon.bmp";
-  bmp.WriteBmp(filename, image1, false, false);
   return 0;
 }
