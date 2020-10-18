@@ -42,6 +42,7 @@ set(SOURCES          # All .cpp files in src/
     src/bmp_loader.cpp
     src/image.cpp
     src/psnr.cpp
+    src/vectorizer.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp

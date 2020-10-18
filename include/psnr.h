@@ -2,19 +2,14 @@
 #include <cmath>
 #include <cstdio>
 #include <iostream>
-#include <stdexcept>
 #include <string>
 
 #include "image.h"
+#include "not_compatible_size_exception.h"
 
 class Psnr {
 public:
   Psnr();
 
   double calculate(Image &original, Image &reference);
-};
-
-class NotCompatibleSizeException : public std::runtime_error {
-public:
-  NotCompatibleSizeException() : std::runtime_error("NotCompatibleSizeException") {}
 };
