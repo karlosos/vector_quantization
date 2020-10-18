@@ -1,8 +1,8 @@
 #pragma once
+#include "image.h"
 #include <cstdio>
 #include <iostream>
 #include <string>
-#include "image.h"
 
 class BmpLoader {
 public:

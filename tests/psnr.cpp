@@ -3,7 +3,6 @@
 #include "doctest.h"
 #include "image.h"
 
-
 TEST_CASE("calculate psnr for two images") {
   BmpLoader bmp = BmpLoader();
 

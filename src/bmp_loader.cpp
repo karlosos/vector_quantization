@@ -63,7 +63,7 @@ bool BmpLoader::ReadBmp(std::string imagepath, Image &image) {
 }
 
 bool BmpLoader::WriteBmp(std::string imagepath, Image &image, bool flip = false,
-                   bool gray = false) {
+                         bool gray = false) {
   unsigned char *flippedData = nullptr;
   if (flip) {
     flippedData = new unsigned char[image.imageSize];
@@ -92,7 +92,8 @@ bool BmpLoader::WriteBmp(std::string imagepath, Image &image, bool flip = false,
     for (int i = 0; i < image.imageSize; i += bytesPerPixel) {
       // We create a grayscale filter by giving the same value to all RGB
       // components. The given value is the average of all components
-      gray = (image.rgbData[i] + image.rgbData[i + 1] + image.rgbData[i + 2]) / 3;
+      gray =
+          (image.rgbData[i] + image.rgbData[i + 1] + image.rgbData[i + 2]) / 3;
       image.rgbData[i] = gray;
       image.rgbData[i + 1] = gray;
       image.rgbData[i + 2] = gray;

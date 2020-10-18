@@ -13,13 +13,14 @@
 #include <utility>
 
 #include "bmp_loader.h"
+#include "bookcode_creator_strategy.h"
 #include "example.h"
 #include "exampleConfig.h"
 #include "image.h"
 #include "psnr.h"
-#include "vectorizer.h"
-#include "bookcode_creator_strategy.h"
 #include "quantizer.h"
+#include "vectorizer.h"
+
 
 void processing_all_images() {
   BmpLoader bmp = BmpLoader();
@@ -48,19 +49,19 @@ void processing_all_images() {
     std::cout << image.width << " ";
     std::cout << image.height << std::endl;
     std::cout << "Is divided by 2: ";
-    bool divided_by = image.width%divider == 0 && image.width%divider == 0;
+    bool divided_by = image.width % divider == 0 && image.width % divider == 0;
     if (!divided_by) {
       all_divided_by = false;
     }
     std::cout << divided_by << std::endl;
-
 
     std::cout << "Writing a new BMP file " << output_path << std::endl;
     std::string filename = "../img/output/out.bmp";
     bmp.WriteBmp(filename, image, false, false);
   }
 
-  std::cout << "All images are divided by " << divider << " " << all_divided_by << std::endl;
+  std::cout << "All images are divided by " << divider << " " << all_divided_by
+            << std::endl;
 
   std::cout << "This application has ended its execution." << std::endl;
 }
@@ -73,11 +74,12 @@ void vectorization() {
 
   // vectorization
   auto vectors = Vectorizer::vectorize(image1, 2);
-  std::cout << "Width " << image1.width << " height:" << image1.height << std::endl;
+  std::cout << "Width " << image1.width << " height:" << image1.height
+            << std::endl;
   std::cout << "vectors length " << vectors.size() << std::endl;
   std::cout << "sample vector: " << std::endl;
-  for (const auto& i: vectors.at(1))
-    std::cout << i << ' '; 
+  for (const auto &i : vectors.at(1))
+    std::cout << i << ' ';
   std::cout << std::endl;
 }
 
@@ -92,7 +94,7 @@ void bookcode() {
   auto [bookcode, vectors] = bookcode_creator.make(image1);
   std::cout << "Bookcode size: " << bookcode.size() << std::endl;
   std::cout << "Bookcode sample: " << std::endl;
-  for (const auto&i : bookcode.at(0)) {
+  for (const auto &i : bookcode.at(0)) {
     std::cout << i << ' ';
   }
   std::cout << std::endl;
@@ -104,12 +106,13 @@ void quantization() {
   Image image1;
   bmp.ReadBmp("../img/input/balloon.bmp", image1);
 
-  BookcodeCreatorStrategyRandom bookcodeCreator = BookcodeCreatorStrategyRandom(50, 2);
+  BookcodeCreatorStrategyRandom bookcodeCreator =
+      BookcodeCreatorStrategyRandom(50, 2);
   Image image2 = Quantizer::quantize(image1, bookcodeCreator);
 
   bmp.WriteBmp("../img/output/balloon_quantized.bmp", image2, false, false);
 
-  Psnr psnr; 
+  Psnr psnr;
   std::cout << "PSNR: " << psnr.calculate(image1, image2) << std::endl;
 }
 
@@ -122,9 +125,9 @@ int main() {
             << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH << "."
             << PROJECT_VERSION_TWEAK << std::endl;
 
-  vectorization();
+  // vectorization();
   // bookcode();
-  // quantization();
+  quantization();
 
   return 0;
 }

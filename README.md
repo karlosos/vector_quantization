@@ -110,7 +110,13 @@ If you have error *could not find a.out* then go to `Run->Open Configuration` an
 
 #### Building on real Windows
 
-Feel free to experiment and please share steps how to deal with it.
+Install CMAKE and then:
+
+1. In root folder run `cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Debug`
+2. Then build with: `cmake -build build`.
+3. Go to build dir with `dir build`.
+4. Run program with `.\Debug\main.exe`.
+5. Run tests with `ctest -C Debug`.
 
 ### Building on MacOS
 

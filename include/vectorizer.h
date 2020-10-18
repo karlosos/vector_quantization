@@ -8,6 +8,7 @@
 class Vectorizer {
 public:
   static std::vector<std::vector<int>> vectorize(Image &image, int window_size);
+
 private:
   Vectorizer();
 };
