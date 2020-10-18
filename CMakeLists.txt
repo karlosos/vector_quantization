@@ -44,6 +44,7 @@ set(SOURCES          # All .cpp files in src/
     src/psnr.cpp
     src/vectorizer.cpp
     src/bookcode_creator_strategy.cpp
+    src/quantizer.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp

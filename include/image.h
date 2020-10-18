@@ -1,9 +1,11 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 class Image {
 public:
   Image();
+  Image(const Image& image);
   virtual ~Image();
 
   unsigned char *rgbData;
@@ -15,4 +17,6 @@ public:
   unsigned short bitsPerPixel;
 
   int getPixel(int row, int col);
+  void setPixel(int row, int col, int value);
+  void setData(std::vector<int> &vectors);
 };
