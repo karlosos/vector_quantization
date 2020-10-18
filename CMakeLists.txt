@@ -43,6 +43,7 @@ set(SOURCES          # All .cpp files in src/
     src/image.cpp
     src/psnr.cpp
     src/vectorizer.cpp
+    src/bookcode_creator_strategy.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
