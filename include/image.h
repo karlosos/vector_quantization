@@ -5,7 +5,7 @@
 class Image {
 public:
   Image();
-  Image(const Image& image);
+  Image(const Image &image);
   virtual ~Image();
 
   unsigned char *rgbData;
