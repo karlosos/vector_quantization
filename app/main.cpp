@@ -16,6 +16,7 @@
 #include "image.h"
 #include "psnr.h"
 #include "vectorizer.h"
+#include "bookcode_creator_strategy.h"
 
 void processing_all_images() {
   BmpLoader bmp = BmpLoader();
@@ -74,12 +75,24 @@ int main() {
 
   Image image1;
   bmp.ReadBmp("../img/input/balloon.bmp", image1);
+
+  // vectorization
   auto vectors = Vectorizer::vectorize(image1, 2);
   std::cout << "Width " << image1.width << " height:" << image1.height << std::endl;
   std::cout << "vectors length " << vectors.size() << std::endl;
   std::cout << "sample vector: " << std::endl;
   for (const auto& i: vectors.at(0))
     std::cout << i << ' '; 
+  std::cout << std::endl;
+
+  // bookcode creation
+  BookcodeCreatorStrategyRandom bookcode_creator;
+  auto bookcode = bookcode_creator.make(image1, 200, 2);
+  std::cout << "Bookcode size: " << bookcode.size() << std::endl;
+  std::cout << "Bookcode sample: " << std::endl;
+  for (const auto&i : bookcode.at(0)) {
+    std::cout << i << ' ';
+  }
   std::cout << std::endl;
 
   Image image2;
